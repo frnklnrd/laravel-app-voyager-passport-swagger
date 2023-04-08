@@ -1,0 +1,42 @@
+version: '3.9'
+
+networks:
+    laravel-backend-network:
+        driver: bridge
+
+services:
+  web:
+    build: .
+    image: laravel_backend_web_server_image
+    container_name: laravel_backend_web_server_container
+    hostname: web_server
+    ports:
+      - 9001:80
+      - 9443:443    
+    #volumes:
+    #  - .:/var/www/html
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db_server
+      DB_DATABASE: reforma
+      DB_USERNAME: root
+      DB_PASSWORD: mysql
+    networks:
+        - laravel-backend-network
+
+  db:
+    image: mysql:8.0
+    container_name: laravel_backend_db_server_container
+    hostname: db_server
+    restart: always
+    environment:
+      MYSQL_DATABASE: reforma
+      MYSQL_ROOT_PASSWORD: mysql
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+        - laravel-backend-network
+
+volumes:
+  dbdata:
