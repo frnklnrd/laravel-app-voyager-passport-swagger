@@ -12,16 +12,15 @@ services:
     hostname: web_server
     ports:
       - 9001:80
-      - 9443:443    
     #volumes:
     #  - .:/var/www/html
     depends_on:
       - db
     environment:
       DB_HOST: db_server
-      DB_DATABASE: reforma
+      DB_DATABASE: laravel
       DB_USERNAME: root
-      DB_PASSWORD: mysql
+      DB_PASSWORD: password
     networks:
         - laravel-backend-network
 
@@ -31,7 +30,7 @@ services:
     hostname: db_server
     restart: always
     environment:
-      MYSQL_DATABASE: reforma
+      MYSQL_DATABASE: laravel
       MYSQL_ROOT_PASSWORD: mysql
     volumes:
       - dbdata:/var/lib/mysql
