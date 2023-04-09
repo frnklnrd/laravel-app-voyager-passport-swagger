@@ -31,11 +31,11 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_ROOT_PASSWORD: password
     volumes:
-      - dbdata:/var/lib/mysql
+      - dbdata1:/var/lib/mysql
     networks:
         - laravel-backend-network
 
 volumes:
-  dbdata:
+  dbdata1:
